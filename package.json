@@ -1,0 +1,21 @@
+{
+  "name": "ffmpeg-microservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "build": "docker build -t sk8m8/ffmpeg-microservice",
+    "start": "docker run -p 49160:8080 -d sk8m8/ffmpeg-microservice",
+    "open": "open http://localhost:49160",
+    "go": "npm run build && npm run startd && docker ps",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express-fileupload": "^1.1.6",
+    "fluent-ffmpeg": "^2.1.2",
+    "nanoexpress": "^1.1.17"
+  }
+}
