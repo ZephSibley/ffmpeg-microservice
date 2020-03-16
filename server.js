@@ -20,11 +20,16 @@ app.post('/transcode/:format', (req, res) => {
     
     const { format } = req.params;
     res.contentType('video/' + format);
-    res.attachment('myfile.' + format);    
+    res.attachment('myfile.' + format);
+
+    const fileName = req.file.name;
 
     // tmp is the default temp files dir for express-fileupload
-    ffmpeg('/tmp/' + req.file.name)
+    ffmpeg('/tmp/' + fileName)
         .toFormat(format)
+        .on('progress', function(progress) {
+            console.log('Processing' + fileName + ': ' + progress.percent + '% done');
+          })
         .on('end', function (err) {
             console.log('Done!')
         })
