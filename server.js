@@ -18,7 +18,7 @@ app.post('/transcode', (req, res) => {
         return res.status(400).send('One file at a time please');
     }
 
-    res.contentType('audio/mp4');
+    res.contentType('video/mp4');
     res.attachment('myfile.mp4');    
 
     // tmp is the default temp files dir for express-fileupload
