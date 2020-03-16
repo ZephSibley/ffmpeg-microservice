@@ -10,20 +10,21 @@ const app = nanoexpress();
 app.use(cors());
 
 app.use(fileUpload({ useTempFiles: true }));
-app.post('/transcode', (req, res) => {
+app.post('/transcode/:format', (req, res) => {
     console.debug('files', req.files);
     console.debug('body', req.body);
 
     if (Object.keys(req.files).length === 1) {
         return res.status(400).send('One file at a time please');
     }
-
-    res.contentType('video/mp4');
-    res.attachment('myfile.mp4');    
+    
+    const { format } = req.params;
+    res.contentType('video/' + format);
+    res.attachment('myfile.' + format);    
 
     // tmp is the default temp files dir for express-fileupload
     ffmpeg('/tmp/' + req.file.name)
-        .toFormat(mp4)
+        .toFormat(format)
         .on('end', function (err) {
             console.log('Done!')
         })
