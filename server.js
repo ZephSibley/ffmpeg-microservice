@@ -21,9 +21,8 @@ app.post('/transcode', (req, res) => {
     res.contentType('audio/mp4');
     res.attachment('myfile.mp4');    
 
-    const video = req.files;
-
-    ffmpeg(video)
+    // tmp is the default temp files dir for express-fileupload
+    ffmpeg('/tmp/' + req.file.name)
         .toFormat(mp4)
         .on('end', function (err) {
             console.log('Done!')
