@@ -17,12 +17,13 @@ app.post('/transcode/:format', (req, res) => {
     if (Object.keys(req.files).length === 1) {
         return res.status(400).send('One file at a time please');
     }
+    const { videoFile } = req.files;
     
     const { format } = req.params;
     res.contentType('video/' + format);
     res.attachment('myfile.' + format);
 
-    const fileName = req.file.name;
+    const fileName = videoFile.name;
 
     // tmp is the default temp files dir for express-fileupload
     ffmpeg('/tmp/' + fileName)
