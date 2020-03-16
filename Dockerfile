@@ -1,7 +1,6 @@
 FROM node:carbon
 VOLUME ["/root"]
-ADD setup-ffmpeg.sh /root
-RUN /root/setup-ffmpeg.sh
+RUN apt-get install -y ffmpeg
 
 WORKDIR /usr/src/app
 
