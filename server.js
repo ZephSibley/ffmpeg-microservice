@@ -5,11 +5,15 @@ import fileUpload from 'express-fileupload';
 
 var PORT = 8080;
 var HOST = '0.0.0.0';
+var tempDir = '/tmp/'
 
 const app = nanoexpress();
 app.use(cors());
 
-app.use(fileUpload({ useTempFiles: true }));
+app.use(fileUpload({ 
+    useTempFiles: true,
+    tempFileDir: tempDir,
+}));
 app.post('/transcode/:format', (req, res) => {
     console.debug('files', req.files);
     console.debug('body', req.body);
@@ -26,7 +30,7 @@ app.post('/transcode/:format', (req, res) => {
     const fileName = videoFile.name;
 
     // tmp is the default temp files dir for express-fileupload
-    ffmpeg('/tmp/' + fileName)
+    ffmpeg(tempDir + fileName)
         .toFormat(format)
         .on('progress', function(progress) {
             console.log('Processing' + fileName + ': ' + progress.percent + '% done');
