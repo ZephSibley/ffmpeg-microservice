@@ -17,5 +17,8 @@
     "express-fileupload": "^1.1.6",
     "fluent-ffmpeg": "^2.1.2",
     "nanoexpress": "^1.1.17"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0"
   }
 }

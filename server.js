@@ -40,7 +40,6 @@ app.post('/transcode/:format', (req, res) => {
             console.log('Error: ' + err.message);
         })
         .pipe(res, { end: true })
-    
 });
 
 app.listen(PORT, HOST);
